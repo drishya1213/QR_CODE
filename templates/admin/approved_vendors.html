@@ -1,0 +1,42 @@
+{% extends 'admin/index.html' %}
+{% block body %}
+<body>
+<form action="/view_vendors_post" method="post" enctype="multipart/form-data">
+    <table class="pull-right">
+        <tr>
+            <td><input type="text" required class="form-control"  name="search"></td>
+            <td><input type="submit" class="btn btn-outline-success" value="Search"></td>
+        </tr>
+    </table>
+    <p></p>
+    <table class="table table-borderless">
+        <tr>
+            <th>S.No</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Licence No</th>
+            <th>Contact</th>
+            <th>Address</th>
+            <th colspan="2"></th>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td><img src="{{ i['image'] }}" width="100px" height="100px">
+                <br>{{ i['name'] }}</td>
+            <td>{{ i['gender'] }}</td>
+            <td>{{ i['lic_no'] }}</td>
+            <td>{{ i['email'] }}
+                <br>{{ i['phone'] }}</td>
+            <td>{{ i['place'] }}
+                <br>{{ i['post'] }}
+                <br>{{ i['district'] }}
+                <br>{{ i['pin'] }}</td>
+
+            <td><a href="/rejected_vendor/{{ i['login_id'] }}" class="btn btn-outline-danger">Reject</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</form>
+</body>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'admin/index.html' %}
+{% block body %}
+<form action="/search_users" method="post" enctype="multipart/form-data">
+    <table class="pull-right">
+        <tr>
+            <td><input type="text" class="form-control" name="search_field" required></td>
+            <td><input type="submit" class="btn btn-outline-success" value="Search"></td>
+        </tr>
+    </table>
+    <p></p>
+    <table class="table table-borderless">
+        <tr>
+            <th>S.No</th>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Address</th>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td><img src="{{ i['u_image'] }}" width="100px" height="100px">
+                <br>{{ i['u_name'] }}</td>
+            <td>{{ i['u_email'] }}
+                <br>{{ i['u_phone'] }}</td>
+            <td>{{ i['u_place'] }}
+                <br>{{ i['u_post'] }}
+                <br>{{ i['u_district'] }}
+                <br>{{ i['u_pin'] }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</form>
+</body>
+{% endblock %}

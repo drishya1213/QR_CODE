@@ -1,0 +1,38 @@
+{% extends 'admin/index.html' %}
+{% block body %}
+<form method="post" action="/view_complaint_search">
+    <table class="table table-borderless">
+        <tr>
+            <th>From</th>
+            <td><input type="date" name="d1" class="form-control" required></td>
+            <th>To</th>
+            <td><input type="date" name="d2" class="form-control" required></td>
+            <td><input type="submit" name="s1" value="Go" class="btn btn-outline-success"></td>
+        </tr>
+    </table>
+<p></p>
+    <table class="table table-borderless">
+        <tr>
+            <th>S.No</th>
+            <th>Date</th>
+            <th>User Info</th>
+            <th>Complaints</th>
+            <th>Reply</th>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ i['date'] }}</td>
+            <td>{{ i['u_name'] }}
+                <br>{{ i['u_email'] }}</td>
+            <td>{{ i['complaint'] }}</td>
+            {% if i['status']=='pending' %}
+            <td><a href="/send_reply/{{ i['complaint_id'] }}" class="btn btn-outline-info">Reply</a></td>
+            {% else %}
+            <td>{{ i['reply'] }}</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+</form>
+{% endblock %}
